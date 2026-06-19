@@ -1,7 +1,5 @@
 # NewsDesk
 
-[Live App](https://newsdesk.streamlit.app/) | [Repository](https://github.com/dipenpan/NewsDesk)
-
 NewsDesk is a Streamlit news reader built for browsing curated stories, reading concise article briefs, saving coverage, voting on usefulness, and joining threaded discussions.
 
 The project began as a CodePath group project and has been refined into a polished reader experience with cleaner navigation, improved styling, and persistent feedback features.

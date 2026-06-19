@@ -589,30 +589,26 @@ def inject_styles():
                 width: 100%;
             }
 
-            section[data-testid="stSidebar"] .stButton > button {
-                background: transparent !important;
-                border: 1px solid transparent !important;
-                display: block !important;
-                justify-content: flex-start;
+            section[data-testid="stSidebar"] [data-testid="stRadio"] label {
+                align-items: center !important;
+                display: flex !important;
                 min-height: 30px !important;
-                padding: 3px 10px !important;
-                text-align: left !important;
+                padding: 2px 0 !important;
             }
 
-            section[data-testid="stSidebar"] div[data-testid="stButton"],
-            section[data-testid="stSidebar"] .stButton {
+            section[data-testid="stSidebar"] [data-testid="stRadio"] label p {
+                color: #f7f2e9 !important;
+                font-size: 14px !important;
+                font-weight: 750 !important;
                 margin: 0 !important;
             }
 
-            section[data-testid="stSidebar"] div[data-testid="stElementContainer"] {
-                margin-bottom: 2px !important;
+            section[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] {
+                gap: 2px !important;
             }
 
-            section[data-testid="stSidebar"] .stButton > button:hover,
-            section[data-testid="stSidebar"] .stButton > button:focus {
-                background: #24272e !important;
-                border-color: #3a3d45 !important;
-                box-shadow: none !important;
+            section[data-testid="stSidebar"] [data-testid="stRadio"] [data-testid="stMarkdownContainer"] {
+                margin: 0 !important;
             }
 
             .sidebar-section-label {
@@ -1006,25 +1002,21 @@ def display_sidebar():
         st.title("NewsDesk")
         st.caption("News, briefs, and discussion.")
 
-        st.markdown("<p class='sidebar-section-label'>Workspace</p>", unsafe_allow_html=True)
-        for view in VIEWS:
-            marker = ">" if st.session_state.view == view else " "
-            if st.button(
-                f"{marker} {view}",
-                key=f"workspace-{view}",
-                use_container_width=True,
-            ):
-                open_workspace(view)
+        selected_view = st.radio(
+            "Workspace",
+            VIEWS,
+            index=VIEWS.index(st.session_state.view),
+        )
+        if selected_view != st.session_state.view:
+            open_workspace(selected_view)
 
-        st.markdown("<p class='sidebar-section-label'>News sections</p>", unsafe_allow_html=True)
-        for section in SECTIONS:
-            marker = ">" if st.session_state.selected_section == section and st.session_state.view == "Feed" else " "
-            if st.button(
-                f"{marker} {section}",
-                key=f"section-{section}",
-                use_container_width=True,
-            ):
-                open_news_section(section)
+        selected_section = st.radio(
+            "News sections",
+            SECTIONS,
+            index=SECTIONS.index(st.session_state.selected_section),
+        )
+        if selected_section != st.session_state.selected_section:
+            open_news_section(selected_section)
 
         st.divider()
         st.metric("Total stories", len(ARTICLES))

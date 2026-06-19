@@ -9,13 +9,14 @@ from datetime import datetime
 from html import escape
 from pathlib import Path
 import sqlite3
+import tempfile
 
 import streamlit as st
 
 
 VIEWS = ["Feed", "Reader", "Saved", "About"]
 SECTIONS = ["Top Stories", "Technology", "Health", "Education"]
-DB_PATH = Path(__file__).with_name("newsdesk.db")
+DB_PATH = Path(tempfile.gettempdir()) / "newsdesk.db"
 LOCAL_READER_ID = "local-reader"
 DEFAULT_POLL = {"Very useful": 12, "Somewhat useful": 7, "Not useful": 2}
 

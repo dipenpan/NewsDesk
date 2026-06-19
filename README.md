@@ -68,9 +68,9 @@ http://localhost:8080
 
 ## Data Storage
 
-NewsDesk stores saved articles, poll votes, comments, and replies in `newsdesk.db`.
+NewsDesk stores saved articles, poll votes, comments, and replies in a local SQLite database created at runtime. On hosted environments such as Streamlit Community Cloud, this storage is temporary and can reset when the app restarts.
 
-For a public multi-user deployment, replace the local SQLite database with a hosted database such as PostgreSQL, Supabase, Firebase, or Cloud SQL.
+For durable multi-user storage, replace the runtime SQLite database with a hosted database such as PostgreSQL, Supabase, Firebase, or Cloud SQL.
 
 ## Verification
 

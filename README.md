@@ -36,7 +36,6 @@ NewsDesk was originally created through CodePath by:
 ```text
 .
 ├── app.py                         # Main Streamlit app
-├── newsdesk.db                    # Local SQLite database
 ├── requirements.txt               # Python dependencies
 ├── .streamlit/config.toml         # Streamlit server config
 ├── Dockerfile                     # Container build config
@@ -58,12 +57,10 @@ Start the app:
 streamlit run app.py
 ```
 
-The Streamlit config runs the app on port `8080`.
-
-Open:
+Streamlit will print the local URL after startup. By default, open:
 
 ```text
-http://localhost:8080
+http://localhost:8501
 ```
 
 ## Data Storage

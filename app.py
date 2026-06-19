@@ -592,10 +592,11 @@ def inject_styles():
             section[data-testid="stSidebar"] .stButton > button {
                 background: transparent !important;
                 border: 1px solid transparent !important;
+                display: block !important;
                 justify-content: flex-start;
-                min-height: 34px !important;
-                padding: 4px 12px !important;
-                text-align: left;
+                min-height: 30px !important;
+                padding: 3px 10px !important;
+                text-align: left !important;
             }
 
             section[data-testid="stSidebar"] div[data-testid="stButton"],
@@ -629,8 +630,8 @@ def inject_styles():
             }
 
             .block-container {
-                max-width: 1240px;
-                padding: 2rem 2rem 4rem;
+                max-width: 1120px;
+                padding: 1.75rem 1.5rem 3.5rem;
             }
 
             h1, h2, h3, h4 {
@@ -668,22 +669,22 @@ def inject_styles():
                 background: var(--surface);
                 border: 1px solid var(--line);
                 border-radius: 8px;
-                margin-bottom: 1.2rem;
-                padding: 26px 28px;
+                margin-bottom: 1rem;
+                padding: 22px 24px;
             }
 
             .masthead h1 {
-                font-size: 44px;
-                line-height: 1.05;
-                margin-bottom: 10px;
+                font-size: 38px;
+                line-height: 1.1;
+                margin-bottom: 8px;
             }
 
             .masthead-copy {
                 color: var(--muted);
-                font-size: 18px;
+                font-size: 16px;
                 line-height: 1.5;
                 margin: 0;
-                max-width: 760px;
+                max-width: 720px;
             }
 
             .hero-image {
@@ -745,6 +746,14 @@ def inject_styles():
                 margin: 12px 0 14px;
             }
 
+            .feed-card-body {
+                padding: 4px 0;
+            }
+
+            .section-heading {
+                margin: 26px 0 12px;
+            }
+
             .tag {
                 background: var(--accent-soft);
                 border: 1px solid #afd7cf;
@@ -770,9 +779,13 @@ def inject_styles():
             }
 
             div[data-testid="stVerticalBlockBorderWrapper"] {
-                background: rgba(255, 253, 248, .92);
-                border-color: var(--line);
+                background: var(--surface) !important;
+                border-color: var(--line) !important;
                 overflow: hidden;
+            }
+
+            div[data-testid="stVerticalBlockBorderWrapper"] > div {
+                padding: 16px !important;
             }
 
             .stButton > button {
@@ -1054,6 +1067,7 @@ def display_feed_card(article, featured=False):
                 unsafe_allow_html=True,
             )
         with text_col:
+            st.markdown("<div class='feed-card-body'>", unsafe_allow_html=True)
             st.markdown(f"<p class='eyebrow'>{article['section']}</p>", unsafe_allow_html=True)
             if featured:
                 st.subheader(article["title"])
@@ -1073,6 +1087,7 @@ def display_feed_card(article, featured=False):
             st.markdown(tag_line, unsafe_allow_html=True)
             if st.button("Read article", key=f"read-{article['id']}", use_container_width=True):
                 select_article(article["id"])
+            st.markdown("</div>", unsafe_allow_html=True)
 
 
 def display_feed():
@@ -1101,11 +1116,11 @@ def display_feed():
         st.info("No stories match this filter yet.")
         return
 
-    st.subheader("Lead Story")
+    st.markdown("<div class='section-heading'><h2>Lead Story</h2></div>", unsafe_allow_html=True)
     display_feed_card(articles[0], featured=True)
 
     if len(articles) > 1:
-        st.subheader("More Coverage")
+        st.markdown("<div class='section-heading'><h2>More Coverage</h2></div>", unsafe_allow_html=True)
         for article in articles[1:]:
             display_feed_card(article)
 
